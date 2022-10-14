@@ -7,9 +7,20 @@ import (
 	"time"
 
 	cfg "github.com/digisan/go-config"
+	"github.com/digisan/gotk/crypto"
 	lk "github.com/digisan/logkit"
 	"github.com/mailgun/mailgun-go/v4"
 )
+
+// func genCode(str string, key []byte) string {
+// 	return fmt.Sprintf("%x", crypto.Encrypt(str, key))
+// }
+
+func translateKey(code string, key []byte) string {
+	data := []byte{}
+	fmt.Sscanf(code, "%x", &data)
+	return crypto.Decrypt(data, key)
+}
 
 var (
 	mg     *mailgun.MailgunImpl
@@ -28,7 +39,7 @@ func initMG() {
 
 	if err := cfg.Init("email", false, fConfig); err == nil {
 		domain = cfg.Val[string]("domain")
-		key = cfg.Val[string]("apikey")
+		key = translateKey(cfg.Val[string]("apikey"), []byte(domain))
 		sender = cfg.Val[string]("sender")
 	}
 
@@ -102,13 +113,13 @@ func send(subject, body string, recipients ...string) chan sdResult {
 
 func SendMG(subject, body string, recipients ...string) (OK bool, sent []string, failed []string, errs []error) {
 	var (
-		timeout = 15 * time.Second
+		timeout = 12 * time.Second
 		chRst   = send(subject, body, recipients...)
 		nOK     = 0
+		done    = make(chan bool)
 	)
 
-	select {
-	case <-time.After(1 * time.Millisecond):
+	go func() {
 		for rst := range chRst {
 			if rst.err == nil {
 				sent = append(sent, rst.recipient)
@@ -121,6 +132,11 @@ func SendMG(subject, body string, recipients ...string) (OK bool, sent []string,
 				close(chRst)
 			}
 		}
+		done <- true
+	}()
+
+	select {
+	case <-done:
 		return nOK == len(recipients), sent, failed, errs
 
 	case <-time.After(timeout):
