@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/digisan/go-config v0.0.8
+	github.com/digisan/gotk v0.1.26
 	github.com/digisan/logkit v0.1.3
 	github.com/mailgun/mailgun-go/v4 v4.8.1
 	gopkg.in/mail.v2 v2.3.1
@@ -12,7 +13,6 @@ require (
 require (
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/digisan/go-generics v0.2.3 // indirect
-	github.com/digisan/gotk v0.1.26 // indirect
 	github.com/digisan/json-tool v0.1.6 // indirect
 	github.com/gookit/color v1.5.2 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect

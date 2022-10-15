@@ -7,12 +7,16 @@ import (
 )
 
 func main() {
+
 	ok, sent, failed, errs := gm.SendMG("Fancy subject!", "Hello from Mailgun Go!!!", "cdutwhu@outlook.com", "4987346@qq.com")
-	fmt.Println(ok)
-	fmt.Println("---")
-	fmt.Println(sent)
-	fmt.Println("---")
-	fmt.Println(failed)
-	fmt.Println("---")
-	fmt.Println(errs)
+
+	fmt.Println("sent status:", ok)
+	if ok {
+		fmt.Println("---")
+		fmt.Println("sent to:", sent)
+		fmt.Println("---")
+		fmt.Println("failed on", failed)
+		fmt.Println("---")
+		fmt.Println("error list:", errs)
+	}
 }
