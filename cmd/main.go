@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	ok, sent, failed, errs := gm.SendMG("Fancy subject!", "Hello from Mailgun Go!!!", "cdutwhu@outlook.com", "4987346@qq.com")
+	ok, sent, failed, errs := gm.SendMail("Fancy subject!", "Hello from Mailgun Go!!!", "cdutwhu@outlook.com", "4987346@qq.com")
 
 	fmt.Println("sent status:", ok)
 	if ok {
