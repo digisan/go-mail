@@ -7,6 +7,7 @@ import (
 	cfg "github.com/digisan/go-config"
 )
 
+// comment out init() if run this test
 func TestGenKeyCodeMG(t *testing.T) {
 	if err := cfg.Init("email", false, cfgMG); err == nil {
 		domain := cfg.Val[string]("domain")
@@ -18,14 +19,15 @@ func TestGenKeyCodeMG(t *testing.T) {
 	}
 }
 
+// comment out init() if run this test
 func TestGenKeyCodeSG(t *testing.T) {
 	if err := cfg.Init("email", false, cfgSG); err == nil {
 		name := cfg.Val[string]("sender")
 		email := cfg.Val[string]("senderEmail")
 		key := cfg.Val[string]("apiKey")
 		fmt.Println(name)
-		// fmt.Println(genCode(key, []byte(email)))
-		fmt.Println(translateKey(key, []byte(email)))
+		// fmt.Println(genCode(key, []byte(email)))   // original api code => encoded api code
+		fmt.Println(translateKey(key, []byte(email))) // encoded api code => original api code
 	}
 }
 

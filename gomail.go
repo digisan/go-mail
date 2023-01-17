@@ -28,14 +28,15 @@ var (
 	timeout     = 12 * time.Second   // both
 )
 
+// SendGrid is the first priority
 func init() {
-	if err := cfg.Init("mailgun", false, cfgMG); err == nil {
-		sendBy = initMG()
+	if err := cfg.Init("sendgrid", false, cfgSG); err == nil {
+		sendBy = initSG()
 		lk.Log("using %v", sendBy)
 		return
 	}
-	if err := cfg.Init("sendgrid", false, cfgSG); err == nil {
-		sendBy = initSG()
+	if err := cfg.Init("mailgun", false, cfgMG); err == nil {
+		sendBy = initMG()
 		lk.Log("using %v", sendBy)
 		return
 	}
@@ -63,10 +64,10 @@ func SendMail(subject, body string, recipients ...string) (OK bool, sent []strin
 	)
 
 	switch sendBy {
-	case "mailgun":
-		chRst = sendMG(subject, body, recipients...)
 	case "sendgrid":
 		chRst = sendSG(subject, body, recipients...)
+	case "mailgun":
+		chRst = sendMG(subject, body, recipients...)
 	default:
 		panic("only [mailgun, sendgrid] are supported")
 	}
