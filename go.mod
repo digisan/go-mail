@@ -3,16 +3,16 @@ module github.com/digisan/go-mail
 go 1.20
 
 require (
-	github.com/digisan/go-config v0.2.1
-	github.com/digisan/gotk v0.3.1
-	github.com/digisan/logkit v0.2.1
-	github.com/mailgun/mailgun-go/v4 v4.8.1
+	github.com/digisan/go-config v0.2.2
+	github.com/digisan/gotk v0.3.2
+	github.com/digisan/logkit v0.2.2
+	github.com/mailgun/mailgun-go/v4 v4.8.2
 	github.com/sendgrid/sendgrid-go v3.12.0+incompatible
 )
 
 require (
 	github.com/BurntSushi/toml v1.2.1 // indirect
-	github.com/digisan/fileflatter v0.0.9 // indirect
+	github.com/digisan/fileflatter v0.0.10 // indirect
 	github.com/digisan/go-generics v0.3.2 // indirect
 	github.com/gookit/color v1.5.2 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
