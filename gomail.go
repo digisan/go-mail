@@ -17,6 +17,7 @@ const (
 )
 
 var (
+	cfgOK       = true
 	sendBy      = ""
 	mg          *mailgun.MailgunImpl // mailgun
 	sg          *sendgrid.Client     // sendgrid
@@ -40,15 +41,19 @@ func init() {
 		lk.Log("using %v", sendBy)
 		return
 	}
-	lk.FailOnErr("%v", fmt.Errorf("at least one of [%v, %v] must be existing & valid", cfgMG, cfgSG))
+	lk.Warn("%v", fmt.Errorf("cannot find any of email agent config [%v, %v], sending email doesn't work", cfgMG, cfgSG))
+	cfgOK = false
 }
 
 func RegisterRecipient(name, email string) error {
-	if validEmail(email) {
-		mRecipient.Store(name, email)
-		return nil
+	if cfgOK {
+		if validEmail(email) {
+			mRecipient.Store(name, email)
+			return nil
+		}
+		return fmt.Errorf("[%v] is invalid email format", email)
 	}
-	return fmt.Errorf("[%v] is invalid email format", email)
+	return fmt.Errorf("cannot find any of email agent config [%v, %v], cannot register recipient", cfgMG, cfgSG)
 }
 
 type result interface {
@@ -57,42 +62,51 @@ type result interface {
 }
 
 func SendMail(subject, body string, recipients ...string) (OK bool, sent []string, failed []string, errs []error) {
-	var (
-		chRst chan result
-		nOK   = 0
-		done  = make(chan bool)
-	)
 
-	switch sendBy {
-	case "sendgrid":
-		chRst = sendSG(subject, body, recipients...)
-	case "mailgun":
-		chRst = sendMG(subject, body, recipients...)
-	default:
-		panic("only [mailgun, sendgrid] are supported")
-	}
+	if cfgOK {
 
-	go func() {
-		for rst := range chRst {
-			if rst.Err() == nil {
-				sent = append(sent, rst.Recipient())
-				nOK++
-			} else {
-				failed = append(failed, rst.Recipient())
-				errs = append(errs, rst.Err())
-			}
-			if nOK == len(recipients) {
-				close(chRst)
-			}
+		var (
+			chRst chan result
+			nOK   = 0
+			done  = make(chan bool)
+		)
+
+		switch sendBy {
+		case "sendgrid":
+			chRst = sendSG(subject, body, recipients...)
+		case "mailgun":
+			chRst = sendMG(subject, body, recipients...)
+		default:
+			panic("only [mailgun, sendgrid] are supported")
 		}
-		done <- true
-	}()
-	select {
-	case <-done:
-		return nOK == len(recipients), sent, failed, errs
 
-	case <-time.After(timeout):
-		errs = append(errs, fmt.Errorf("timeout @%vs", timeout/time.Second))
+		go func() {
+			for rst := range chRst {
+				if rst.Err() == nil {
+					sent = append(sent, rst.Recipient())
+					nOK++
+				} else {
+					failed = append(failed, rst.Recipient())
+					errs = append(errs, rst.Err())
+				}
+				if nOK == len(recipients) {
+					close(chRst)
+				}
+			}
+			done <- true
+		}()
+		select {
+		case <-done:
+			return nOK == len(recipients), sent, failed, errs
+
+		case <-time.After(timeout):
+			errs = append(errs, fmt.Errorf("timeout @%vs", timeout/time.Second))
+			return false, nil, nil, errs
+		}
+
+	} else {
+
+		errs = append(errs, fmt.Errorf("cannot find any of email agent config [%v, %v], cannot send email", cfgMG, cfgSG))
 		return false, nil, nil, errs
 	}
 }
