@@ -41,6 +41,7 @@ func init() {
 		lk.Log("using %v", sendBy)
 		return
 	}
+	lk.WarnDetail(false)
 	lk.Warn("%v", fmt.Errorf("cannot find any of email agent config [%v, %v], sending email doesn't work", cfgMG, cfgSG))
 	cfgOK = false
 }
