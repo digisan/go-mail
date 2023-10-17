@@ -2,13 +2,22 @@ package main
 
 import (
 	"fmt"
+	"os"
 
+	. "github.com/digisan/go-generics/v2"
 	gm "github.com/digisan/go-mail"
 )
 
 func main() {
 
-	ok, sent, failed, errs := gm.SendMail("Fancy subject!", "Hello from digisan/go-mail Go!!!", "cdutwhu@outlook.com", "4987346@qq.com")
+	recipients := []string{"cdutwhu@outlook.com", "cdutwhu@qq.com"}
+	for _, r := range os.Args[1:] {
+		if IsEmail(r) {
+			recipients = append(recipients, r)
+		}
+	}
+
+	ok, sent, failed, errs := gm.SendMail("Fancy subject!", "Hello from digisan/go-mail Go!!!", recipients...)
 
 	fmt.Println("sent status:", ok)
 	if ok {

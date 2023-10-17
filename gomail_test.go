@@ -14,7 +14,7 @@ func TestGenKeyCodeMG(t *testing.T) {
 		sender := cfg.Val[string]("sender")
 		key := cfg.Val[string]("apiKey")
 		fmt.Println(sender)
-		// fmt.Println(genCode(key, []byte(email)))
+		// fmt.Println(genCode(key, []byte(domain)))
 		fmt.Println(translateKey(key, []byte(domain)))
 	}
 }
