@@ -5,10 +5,10 @@ go 1.21
 toolchain go1.21.1
 
 require (
-	github.com/digisan/go-config v0.2.10
+	github.com/digisan/go-config v0.2.11
 	github.com/digisan/go-generics v0.4.0
-	github.com/digisan/gotk v0.4.2
-	github.com/digisan/logkit v0.2.9
+	github.com/digisan/gotk v0.4.3
+	github.com/digisan/logkit v0.2.10
 	github.com/mailgun/mailgun-go/v4 v4.11.0
 	github.com/sendgrid/sendgrid-go v3.13.0+incompatible
 )
