@@ -11,9 +11,9 @@ import (
 	"github.com/sendgrid/sendgrid-go"
 )
 
-const (
-	cfgMG = "mailgun-config.json"
-	cfgSG = "sendgrid-config.json"
+var (
+	cfgSG = []string{"sendgrid-config.toml", "sendgrid-config.json"}
+	cfgMG = []string{"mailgun-config.toml", "mailgun-config.json"}
 )
 
 var (
@@ -31,18 +31,20 @@ var (
 
 // SendGrid is the first priority
 func init() {
-	if err := cfg.Init("sendgrid", false, cfgSG); err == nil {
-		sendBy = initSG()
-		lk.Log("using %v", sendBy)
-		return
+	if err := cfg.Init("sendgrid", false, cfgSG...); err == nil {
+		if sendBy = initSG(); len(sendBy) > 0 {
+			lk.Log("using %v", sendBy)
+			return
+		}
 	}
-	if err := cfg.Init("mailgun", false, cfgMG); err == nil {
-		sendBy = initMG()
-		lk.Log("using %v", sendBy)
-		return
+	if err := cfg.Init("mailgun", false, cfgMG...); err == nil {
+		if sendBy = initMG(); len(sendBy) > 0 {
+			lk.Log("using %v", sendBy)
+			return
+		}
 	}
 	lk.WarnDetail(false)
-	lk.Warn("%v", fmt.Errorf("cannot find any of email agent config [%v, %v], sending email doesn't work", cfgMG, cfgSG))
+	lk.Warn("email agent config [%v, %v] loaded error, sending email cannot work", cfgMG, cfgSG)
 	cfgOK = false
 }
 

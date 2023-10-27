@@ -15,20 +15,21 @@ func initMG() string {
 
 	lk.Log("starting... email MG")
 
-	if err := cfg.Init("email", false, cfgMG); err == nil {
+	if err := cfg.Init("email", false, cfgMG...); err == nil {
 		domain = cfg.Val[string]("domain")
 		sender = cfg.Val[string]("sender")
 		senderEmail = cfg.Val[string]("senderEmail")
 		key = translateKey(cfg.Val[string]("apiKey"), []byte(domain))
 	}
 
-	lk.FailOnErrWhen(len(senderEmail) == 0, "%v", fmt.Errorf("[senderEmail] is empty, '%s' must be loaded", cfgMG))
-	lk.FailOnErrWhen(len(domain) == 0, "%v", fmt.Errorf("[domain] is empty, '%s' must be loaded", cfgMG))
-	lk.FailOnErrWhen(len(key) == 0, "%v", fmt.Errorf("[apiKey] is empty, '%s' must be loaded", cfgMG))
+	if len(senderEmail) == 0 || len(domain) == 0 || len(key) == 0 {
+		lk.Warn("[senderEmail] or [domain] or [apiKey] is empty, check [%v]", cfg.Path)
+		return ""
+	}
 
 	mg = mailgun.NewMailgun(domain, key)
 
-	lk.Log("started... email MG")
+	lk.Log("started... email MG @ @ %s", cfg.Path)
 
 	return "mailgun"
 }
@@ -108,4 +109,3 @@ func sendMG(subject, body string, recipients ...string) chan result {
 	}
 	return chRst
 }
-

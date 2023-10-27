@@ -14,19 +14,21 @@ func initSG() string {
 
 	lk.Log("starting... email SG")
 
-	if err := cfg.Init("email", false, cfgSG); err == nil {
+	if err := cfg.Init("email", false, cfgSG...); err == nil {
 		domain = cfg.Val[string]("domain")
 		sender = cfg.Val[string]("sender")
 		senderEmail = cfg.Val[string]("senderEmail")
 		key = translateKey(cfg.Val[string]("apiKey"), []byte(senderEmail))
 	}
 
-	lk.FailOnErrWhen(len(senderEmail) == 0, "%v", fmt.Errorf("[senderEmail] is empty, '%s' must be loaded", cfgSG))
-	lk.FailOnErrWhen(len(key) == 0, "%v", fmt.Errorf("[apiKey] is empty, '%s' must be loaded", cfgSG))
+	if len(senderEmail) == 0 || len(key) == 0 {
+		lk.Warn("[senderEmail] or [apiKey] is empty, check [%v]", cfg.Path)
+		return ""
+	}
 
 	sg = sendgrid.NewSendClient(key)
 
-	lk.Log("started... email SG")
+	lk.Log("started... email SG @ %s", cfg.Path)
 
 	return "sendgrid"
 }
