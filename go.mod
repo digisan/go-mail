@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.21.1
 
 require (
-	github.com/digisan/go-config v0.2.11
+	github.com/digisan/go-config v0.2.12
 	github.com/digisan/go-generics v0.4.0
 	github.com/digisan/gotk v0.4.4
 	github.com/digisan/logkit v0.2.11

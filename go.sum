@@ -3,8 +3,8 @@ github.com/BurntSushi/toml v1.3.2/go.mod h1:CxXYINrC8qIiEnFrOxCa7Jy5BFHlXnUU2pbi
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/digisan/go-config v0.2.11 h1:S+dWVLb7d6cfxzfrF0TQiJ1BddM+n7x5qTDk2FUrpCE=
-github.com/digisan/go-config v0.2.11/go.mod h1:ZWP4hnmmAX1LWX500Okv9bSMr/vi0YmACqj9KjXG+Hc=
+github.com/digisan/go-config v0.2.12 h1:18sOVO0CHaM/Lpx9ChSe94BXHLgB1O/+ELbWNtkeXFI=
+github.com/digisan/go-config v0.2.12/go.mod h1:ZWP4hnmmAX1LWX500Okv9bSMr/vi0YmACqj9KjXG+Hc=
 github.com/digisan/go-generics v0.4.0 h1:8AqfkwhE1vmy3HvY3YkzwRk2LY4140JvnTZkfoFZenI=
 github.com/digisan/go-generics v0.4.0/go.mod h1:2aTVLuSocslv7ZotYw/YhKeIxyqsERsF9hfR/UsvXm8=
 github.com/digisan/gotk v0.4.4 h1:80QnK7U90BRg7gglvp56V/5vkrEl3IkmmLPo+uWWGLc=

@@ -23,13 +23,13 @@ func initMG() string {
 	}
 
 	if len(senderEmail) == 0 || len(domain) == 0 || len(key) == 0 {
-		lk.Warn("[senderEmail] or [domain] or [apiKey] is empty, check [%v]", cfg.Path)
+		lk.Warn("[senderEmail] or [domain] or [apiKey] is empty, check [%v]", cfg.CurrentCfgFile())
 		return ""
 	}
 
 	mg = mailgun.NewMailgun(domain, key)
 
-	lk.Log("started... email MG @ @ %s", cfg.Path)
+	lk.Log("started... email MG @ @ %s", cfg.CurrentCfgFile())
 
 	return "mailgun"
 }

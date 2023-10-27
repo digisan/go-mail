@@ -22,13 +22,13 @@ func initSG() string {
 	}
 
 	if len(senderEmail) == 0 || len(key) == 0 {
-		lk.Warn("[senderEmail] or [apiKey] is empty, check [%v]", cfg.Path)
+		lk.Warn("[senderEmail] or [apiKey] is empty, check [%v]", cfg.CurrentCfgFile())
 		return ""
 	}
 
 	sg = sendgrid.NewSendClient(key)
 
-	lk.Log("started... email SG @ %s", cfg.Path)
+	lk.Log("started... email SG @ %s", cfg.CurrentCfgFile())
 
 	return "sendgrid"
 }
