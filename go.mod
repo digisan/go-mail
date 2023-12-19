@@ -1,14 +1,14 @@
 module github.com/digisan/go-mail
 
-go 1.21.4
+go 1.21.5
 
 require (
-	github.com/digisan/go-config v0.2.15
+	github.com/digisan/go-config v0.2.16
 	github.com/digisan/go-generics v0.4.3
-	github.com/digisan/gotk v0.4.12
-	github.com/digisan/logkit v0.2.14
+	github.com/digisan/gotk v0.4.14
+	github.com/digisan/logkit v0.2.15
 	github.com/mailgun/mailgun-go/v4 v4.12.0
-	github.com/sendgrid/sendgrid-go v3.13.0+incompatible
+	github.com/sendgrid/sendgrid-go v3.14.0+incompatible
 )
 
 require (
