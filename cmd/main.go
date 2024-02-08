@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	. "github.com/digisan/go-generics/v2"
+	. "github.com/digisan/go-generics"
 	gm "github.com/digisan/go-mail"
 )
 
