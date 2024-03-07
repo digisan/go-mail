@@ -9,8 +9,8 @@ github.com/digisan/go-generics v0.5.1 h1:gHROrj5IZUC5JAPXSNEpD0rguQRmV/mG+JiVclu
 github.com/digisan/go-generics v0.5.1/go.mod h1:9MYOVhv77wqWetVAc/9cRopVl7vWx+ngykZWyUSBuzM=
 github.com/digisan/gotk v0.5.1 h1:XRhlzSfk9PriZvRexKg21DU63gZs9uQluORJS5uc2+0=
 github.com/digisan/gotk v0.5.1/go.mod h1:HHgoQa/V1hDeKfIKEg+qFGuBTA90eqKmDFu3r81lJdU=
-github.com/digisan/logkit v0.3.1 h1:2RyvQzgesRmU4Vrjmp0WG8HzN7aMDbEJfIRjm2FVDc4=
-github.com/digisan/logkit v0.3.1/go.mod h1:S1Fhb1GVOXlgRRoJ6gy7CLmTZNQXm+zd01Ysjx7uuj4=
+github.com/digisan/logkit v0.3.3 h1:tABkW5OH+x8Ei0rLb1jdqmqnujVVLRx+BdwErH+OBL0=
+github.com/digisan/logkit v0.3.3/go.mod h1:57yv9bsI8zVfgvT5epz7ASwUnXfBMpj3+YNnCQIpa0s=
 github.com/facebookgo/ensure v0.0.0-20160127193407-b4ab57deab51 h1:0JZ+dUmQeA8IIVUMzysrX4/AKuQwWhV2dYQuPZdvdSQ=
 github.com/facebookgo/ensure v0.0.0-20160127193407-b4ab57deab51/go.mod h1:Yg+htXGokKKdzcwhuNDwVvN+uBxDGXJ7G/VN1d8fa64=
 github.com/facebookgo/stack v0.0.0-20160209184415-751773369052 h1:JWuenKqqX8nojtoVVWjGfOF9635RETekkoH6Cc9SX0A=
