@@ -2,5 +2,5 @@
 
 wrapper for email function
 
-go upgrade to 1.22.0
-version => v0.3.0
+go upgrade to 1.22.1
+version => v0.3.2
