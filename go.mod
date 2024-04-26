@@ -3,10 +3,10 @@ module github.com/digisan/go-mail
 go 1.22.2
 
 require (
-	github.com/digisan/go-config v0.3.3
-	github.com/digisan/go-generics v0.5.3
-	github.com/digisan/gotk v0.5.6
-	github.com/digisan/logkit v0.3.6
+	github.com/digisan/go-config v0.3.4
+	github.com/digisan/go-generics v0.5.4
+	github.com/digisan/gotk v0.5.7
+	github.com/digisan/logkit v0.3.7
 	github.com/mailgun/mailgun-go/v4 v4.12.0
 	github.com/sendgrid/sendgrid-go v3.14.0+incompatible
 )
