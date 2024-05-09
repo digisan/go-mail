@@ -1,12 +1,12 @@
 module github.com/digisan/go-mail
 
-go 1.22.2
+go 1.22.3
 
 require (
-	github.com/digisan/go-config v0.3.4
+	github.com/digisan/go-config v0.3.5
 	github.com/digisan/go-generics v0.5.4
-	github.com/digisan/gotk v0.5.7
-	github.com/digisan/logkit v0.3.7
+	github.com/digisan/gotk v0.5.9
+	github.com/digisan/logkit v0.3.8
 	github.com/mailgun/mailgun-go/v4 v4.12.0
 	github.com/sendgrid/sendgrid-go v3.14.0+incompatible
 )
@@ -26,7 +26,7 @@ require (
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/tidwall/sjson v1.2.5 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
-	golang.org/x/net v0.24.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
+	golang.org/x/net v0.25.0 // indirect
+	golang.org/x/sys v0.20.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
